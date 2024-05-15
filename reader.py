@@ -1,13 +1,16 @@
-from pdf2image import convert_from_path
+from tabula import convert_into
 from os import remove
-from pytesseract import image_to_string
-images = convert_from_path("2023-PSSD-York-University.pdf", poppler_path='poppler-24.02.0/Library/bin')
-for i in range(len(images)):
-    images[i].save('page'+str(i)+'.jpg', 'JPEG')
-    with open("page"+str(i)+".jpg", "r") as file:
-        table = image_to_string("page"+str(i)+".jpg", config="--psm 6")
-        # Remove title from each page
-        table = table.replace("Record of employees' 2023 salaries and benefits", "").replace("Registre des traitements et avantages verses aux employes en 2023", "")
-        table = table.replace("~","").replace("|", "").replace("'","").replace("(","").replace("_","").replace("=","").replace("-","")
-        print(table)
-    remove("page"+str(i)+".jpg")
+
+def load_data():
+    convert_into("2023-PSSD-York-University.pdf", "infile.csv", output_format="csv", pages='all')
+    print("Done conversion!")
+    with open("infile.csv") as filein, open("output.csv", "w") as fileout:
+            for line in filein:
+                if line.split(",")[0] == "2023":
+                    fileout.write(line)
+                else:
+                    continue
+    remove("infile.csv")
+
+if __name__ == "__main__":
+    load_data()

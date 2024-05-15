@@ -1,3 +1,6 @@
 *.jpg
 poppler-24.02.0/
 .pytest_cache/
+.venv/
+__pycache__/
+*.csv
