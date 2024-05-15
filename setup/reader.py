@@ -1,8 +1,8 @@
 from tabula import convert_into
 from os import remove
 
-def load_data():
-    convert_into("2023-PSSD-York-University.pdf", "infile.csv", output_format="csv", guess=False, pages="all")
+def read_data(pdf:str):
+    convert_into(pdf, "infile.csv", output_format="csv", guess=False, pages="all")
     print("Done conversion!")
     with open("infile.csv") as filein, open("output.csv", "w") as fileout:
             for line in filein:
@@ -14,4 +14,4 @@ def load_data():
     remove("infile.csv")
 
 if __name__ == "__main__":
-    load_data()
+    read_data("2023-PSSD-York-University.pdf")
