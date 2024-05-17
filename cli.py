@@ -7,16 +7,11 @@ def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
 def search_name(df, name):
-    #input is a dataframe and name, but name can be first name, last name or both. need to match specific cases
-    #return the row that matches the name
-    #if no match, return None
     name = name.lower()
     name = name.split(" ")
     if len(name) == 1:
-        #search for first name or last name
         result = df[(df['First Name'].str.contains(name[0], case=False)) | (df['Last Name'].str.contains(name[0], case=False))]
     else:
-        #search for both first name and last name
         result = df[(df['First Name'].str.contains(name[0], case=False)) & (df['Last Name'].str.contains(name[1], case=False))]
     if result.empty:
         return None
@@ -24,7 +19,7 @@ def search_name(df, name):
         return result
 
 
-print("Loading data...")
+print("[blue]Loading data...")
 
 offline = "data/2023-PSSD-York-University-output.csv"
 url = "https://raw.githubusercontent.com/truong-kyle/YorkAnalyst/main/data/2023-PSSD-York-University-output.csv"
@@ -32,12 +27,12 @@ try: df = dataloader.load_data(url)
 except Exception as e:
     print(e)
     exit()
-print("Data loaded!")
+print("[blue]Data loaded!")
 time.sleep(1)
 cls()
 time.sleep(0.5)
 while True:
-    print("York University Salary Data: 2023")
+    print("[red]York University Salary Data: 2023")
     print("==================================")
     print("1. [green]Display the first [red]X [green]rows")
     print("2. [green]Search")
@@ -45,7 +40,7 @@ while True:
     choice = input("Enter your choice: ")
     if choice == "1":
         cls()
-        rows = int(input("Enter number of rows to display, or [red]0 to exit: "))
+        rows = int(input("Enter number of rows to display, or 0 to exit: "))
         if (rows==0): 
             cls()
             continue
@@ -53,12 +48,35 @@ while True:
         input("Press Enter to continue...")
         cls()
     elif choice == "2":
-        result = input("Enter name to search: ")
-        print(search_name(df, result))
-        input("Press Enter to continue...")
+        cls()
+        print("1. [green]Search by name")
+        print("2. [green]Search by position title")
+        print("3. [green]Search by salary range")
+        print("4. [red]Back to main menu")
+        match int(input("Enter your choice: ")):
+            case 1:
+                result = input("Enter name to search: ")
+                print(search_name(df, result))
+                input("Press Enter to continue...")
+            case 2:
+                result = input("Enter position title to search: ")
+                print(df[df['Position Title'].str.contains(result, case=False)])
+                input("Press Enter to continue...")
+            case 3:
+                min_salary = float(input("Enter minimum salary: "))
+                max_salary = float(input("Enter maximum salary: "))
+                print(df[(df['Salary Paid'] >= min_salary) & (df['Salary Paid'] <= max_salary)])
+                input("Press Enter to continue...")
+            case 4:
+                cls()
+                continue
+            case _:
+                print("[red]Invalid choice!")
+                input("Press Enter to continue...")
+        cls()
     elif choice == "3":
         exit()
     else:
-        print("Invalid choice!")
+        print("[red]Invalid choice!")
         input("Press Enter to continue...")
         cls()
