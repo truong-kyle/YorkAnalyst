@@ -1,6 +1,6 @@
 import time
 import os
-from setup import dataloader
+from config import dataloader
 from rich import print
 
 def cls():
@@ -18,16 +18,23 @@ time.sleep(0.5)
 while True:
     print("[red]York University Salary Data: 2023")
     print("==================================")
-    print("1. Display the first X rows")
-    print("2. Search")
-    print("3. Exit")
+    print("1. [green]Display the first [red]X [green]rows")
+    print("2. [green]Search")
+    print("3. [red]Exit")
     choice = input("Enter your choice: ")
     if choice == "1":
-        rows = int(input("Enter number of rows to display: "))
+        cls()
+        rows = int(input("Enter number of rows to display, or [red]0 to exit: "))
+        if (rows==0): 
+            cls()
+            continue
         print(df.head(rows))
         input("Press Enter to continue...")
         cls()
     elif choice == "2":
+        cls()
+        print(df.columns)
+        column = input("Please select a column to search by: ")
         search = input("Enter search term: ")
         print(df[df['Position Title'].str.contains(search, case=False)])
     elif choice == "3":

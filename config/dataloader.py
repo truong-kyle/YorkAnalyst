@@ -5,9 +5,10 @@ def load_data(url:str):
     df['Salary Paid'] = df['Salary Paid'].astype(float)
     df['Taxable Benefits'] = df['Taxable Benefits'].astype(float)
     df.fillna(0, inplace=True)
+    pd.set_option('display.max_rows', None)
     return df
 
 if __name__ == "__main__":
     url = "https://raw.githubusercontent.com/truong-kyle/YorkAnalyst/main/data/2023-PSSD-York-University-output.csv"
     dataframe = load_data(url)
-    print(dataframe.head())
+    print(dataframe)
