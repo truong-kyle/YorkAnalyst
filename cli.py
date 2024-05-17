@@ -23,7 +23,8 @@ print("[blue]Loading data...")
 
 offline = "data/2023-PSSD-York-University-output.csv"
 url = "https://raw.githubusercontent.com/truong-kyle/YorkAnalyst/main/data/2023-PSSD-York-University-output.csv"
-try: df = dataloader.load_data(url)
+try:
+    df = dataloader.load_data(url)
 except Exception as e:
     print(e)
     exit()
@@ -40,40 +41,60 @@ while True:
     choice = input("Enter your choice: ")
     if choice == "1":
         cls()
-        rows = int(input("Enter number of rows to display, or 0 to exit: "))
-        if (rows==0): 
-            cls()
-            continue
-        print(df.head(rows))
-        input("Press Enter to continue...")
-        cls()
+        while True:
+            try:
+                rows = int(input("Enter number of rows to display, or 0 to exit: "))
+                if rows == 0:
+                    cls()
+                    break
+                print(df.head(rows))
+                input("Press Enter to continue...")
+                cls()
+                break
+            except ValueError:
+                print("[red]Invalid input! Please enter a valid number.")
     elif choice == "2":
         cls()
         print("1. [green]Search by name")
         print("2. [green]Search by position title")
         print("3. [green]Search by salary range")
         print("4. [red]Back to main menu")
-        match int(input("Enter your choice: ")):
-            case 1:
-                result = input("Enter name to search: ")
-                print(search_name(df, result))
-                input("Press Enter to continue...")
-            case 2:
-                result = input("Enter position title to search: ")
-                print(df[df['Position Title'].str.contains(result, case=False)])
-                input("Press Enter to continue...")
-            case 3:
-                min_salary = float(input("Enter minimum salary: "))
-                max_salary = float(input("Enter maximum salary: "))
-                print(df[(df['Salary Paid'] >= min_salary) & (df['Salary Paid'] <= max_salary)])
-                input("Press Enter to continue...")
-            case 4:
+        while True:
+            try:
+                option = int(input("Enter your choice: "))
+                if option == 1:
+                    result = input("Enter name to search: ")
+                    print(search_name(df, result))
+                    input("Press Enter to continue...")
+                    cls()
+                    break
+                elif option == 2:
+                    result = input("Enter position title to search: ")
+                    print(df[df['Position Title'].str.contains(result, case=False)])
+                    input("Press Enter to continue...")
+                    cls()
+                    break
+                elif option == 3:
+                    while True:
+                        try:
+                            min_salary = float(input("Enter minimum salary: "))
+                            max_salary = float(input("Enter maximum salary: "))
+                            print(df[(df['Salary Paid'] >= min_salary) & (df['Salary Paid'] <= max_salary)])
+                            input("Press Enter to continue...")
+                            cls()
+                            break
+                        except ValueError:
+                            input("[red]Invalid input! Please enter a valid number.")
+                elif option == 4:
+                    cls()
+                    break
+                else:
+                    print("[red]Invalid choice!")
+                    input("Press Enter to continue...")
+                    cls()
+            except ValueError:
+                input("[red]Invalid input! Please enter a valid number.")
                 cls()
-                continue
-            case _:
-                print("[red]Invalid choice!")
-                input("Press Enter to continue...")
-        cls()
     elif choice == "3":
         exit()
     else:
