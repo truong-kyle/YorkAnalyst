@@ -3,17 +3,10 @@ import os
 from config import dataloader
 from rich import print
 import pandas as pd
+import search
 
 def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
-
-def search_name(df, name):
-    name = name.lower().split(" ")
-    if len(name) == 1:
-        result = df[df['First Name'].str.contains(name[0], case=False) | df['Last Name'].str.contains(name[0], case=False)]
-    else:
-        result = df[df['First Name'].str.contains(name[0], case=False) & df['Last Name'].str.contains(name[1], case=False)]
-    return result if not result.empty else None
 
 def load_data(offline, url):
     try:
@@ -76,14 +69,14 @@ def main():
                     
                     if option == 1:
                         name = input("Enter name to search: ")
-                        result = search_name(df, name)
+                        result = search.name(name, df)
                         print(result if result is not None else "No results found.")
                         input("Press Enter to continue...")
                         break
                     
                     elif option == 2:
                         position = input("Enter position title to search: ")
-                        result = df[df['Position Title'].str.contains(position, case=False)]
+                        result = search.position(position, df)
                         print(result if not result.empty else "No results found.")
                         input("Press Enter to continue...")
                         break
@@ -103,7 +96,7 @@ def main():
                             except ValueError:
                                 print("[red]Invalid input! Please enter a valid option.")
                         
-                        result = df[(df['Salary Paid'] >= min_salary) & (df['Salary Paid'] <= max_salary)]
+                        result = search.salary(min_salary, max_salary, df)
                         print(result if not result.empty else "No results found.")
                         input("Press Enter to continue...")
                         break
