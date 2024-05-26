@@ -39,7 +39,6 @@ table{
     margin: 0 auto;
     width: 80%;
     border-collapse: collapse;
-
 }
 
 input{
@@ -53,4 +52,11 @@ input:focus {
     outline: none;   
     border: 1px solid red;
     border-radius: 3px;
+}
+
+#johnorgo {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-align: center;
 }

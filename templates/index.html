@@ -9,24 +9,20 @@
 <body>
     <h1>York University Salary Table - 2023</h1>
     <h2>Search</h2>
-    <form>
-        <input type="text" id="lname" name="lname" placeholder="Last Name">
-        <input type="text" id="fname" name="fname" placeholder="First Name">
-        <input type="text" id="position" name="position" placeholder="Position Title">
-        <input type="number" id="minsal" name="minsal" placeholder="Minimum Salary">
-        <input type="number" id="maxsal" name="maxsal" placeholder="Maximum Salary">    
-        <input type="submit" value="Submit">
-    </form>
-    <table>
-        <tr>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Position Title</th>
-            <th>Salary</th>
-            <th>Taxable Benefits</th>
-        </tr>
-        
-    </table>
+    <div id="johnorgo">
+
+        <form method="POST">
+            <input type="text" id="lname" name="lname" placeholder="Last Name">
+            <input type="text" id="fname" name="fname" placeholder="First Name">
+            <input type="text" id="position" name="position" placeholder="Position Title">
+            <input type="number" id="minsal" name="minsal" placeholder="Minimum Salary">
+            <input type="number" id="maxsal" name="maxsal" placeholder="Maximum Salary">    
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    {% for row in data %}
+    {{table|safe}}
+    {% endfor %}
 
 </body>
 </html>
