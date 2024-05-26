@@ -3,7 +3,7 @@ import pandas as pd
 def name(name: str, df: pd.DataFrame):
     name = name.split(" ")
     if len(name) == 1:
-        result = first(name, df) | last(name, df)
+        result = df[df['First Name'].str.contains(name[0], case=False) | df['Last Name'].str.contains(name[0], case=False)]
     else:
         result = df[df['First Name'].str.contains(name[0], case=False) & df['Last Name'].str.contains(name[1], case=False)]
     return result if not result.empty else None
