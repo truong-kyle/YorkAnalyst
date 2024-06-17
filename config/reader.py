@@ -6,12 +6,12 @@ def read_data(pdf:str):
     print("Done conversion!")
     with open("infile.csv") as filein, open("output.csv", "w") as fileout:
             for line in filein:
-                if line.split(",")[0] == "2023":
-                    line = line.replace("2023,Universities,","").replace("York University","").replace(",,",",")
+                if line.split(",")[0] == "2021":
+                    line = line.replace("2021,Universities,","").replace("York University","").replace(",,",",")
                     fileout.write(line)
                 else:
                     continue
     remove("infile.csv")
 
 if __name__ == "__main__":
-    read_data("2023-PSSD-York-University.pdf")
+    read_data("config/2021-PSSD-York-University.pdf")
