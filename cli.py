@@ -7,17 +7,30 @@ import tools.search as search
 def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def display_menu():
-    print("[red]York University Salary Data: 2023")
+def display_menu(year: int):
+    print(f"[red]York University Salary Data: 20{year}")
     print("==================================")
     print("1. [green]Display the first [red]X [green]rows")
     print("2. [green]Search")
     print("3. [red]Exit")
 
 def main():
+    try :
+        year = int(input("Please select a year (21, 22, 23): "))
+        if year == 21:
+            print("You selected 2021")
+        elif year == 22:
+            print("You selected 2022")
+        elif year == 23:
+            print("You selected 2023")
+        else:
+            print("Invalid year")
+    except ValueError:
+        print("Invalid input! Please enter a valid option.")
+        return
     print("[blue]Loading data...")
-    offline = "data/2023-PSSD-York-University-output.csv"
-    url = "https://raw.githubusercontent.com/truong-kyle/YorkAnalyst/main/data/2023-PSSD-York-University-output.csv"
+    offline = f"data/20{year}-PSSD-York-University-output.csv"
+    url = f"https://raw.githubusercontent.com/truong-kyle/YorkAnalyst/main/data/20{year}-PSSD-York-University-output.csv"
     df = load_data(offline, url)
     print("[blue]Data loaded!")
     time.sleep(1)
@@ -26,7 +39,7 @@ def main():
     
     while True:
         cls()
-        display_menu()
+        display_menu(year)
         choice = input("Enter your choice: ")
         
         if choice == "1":
