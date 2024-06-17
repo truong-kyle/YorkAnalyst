@@ -19,6 +19,12 @@ h2{
     text-align: center;
 }
 
+h3{
+    font-family: 'IBM Plex Mono', sans-serif;
+    font-size: 1.2em;
+    text-align: center;
+}
+
 form {
     margin: 0 auto;
     width: 80%;
@@ -63,4 +69,9 @@ input:focus {
 
 tr:nth-child(2n){
     background-color: #eeee;
+}
+
+th{
+    background-color: #aa0000;
+    color: white;
 }

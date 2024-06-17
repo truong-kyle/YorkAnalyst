@@ -17,7 +17,9 @@ def index():
         data = get_table_by_search(year, lname, fname, title, min_sal, max_sal)
     else:
         data = get_table(year)
-    return render_template('index.html', results=data, year=year)
+
+    count = len(data)
+    return render_template('index.html', results=data, year=year, count=count)
 
 if __name__ == "__main__":
     app.run(debug=True)
