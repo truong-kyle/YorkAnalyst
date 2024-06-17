@@ -13,4 +13,3 @@ if __name__ == "__main__":
     url = "https://raw.githubusercontent.com/truong-kyle/YorkAnalyst/main/data/2023-PSSD-York-University-output.csv"
     dataframe = load_data(url)
     print(dataframe)
-    dataframe.to_sql('salaries23', sqlite3.connect('salaries.db'), if_exists='replace', index=False)

@@ -1,8 +1,8 @@
 import os, time
-from load import load_data
+from tools.load import load_data
 from rich import print
 import pandas as pd
-import search
+import tools.search as search
 
 def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
