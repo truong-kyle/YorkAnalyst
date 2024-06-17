@@ -60,3 +60,7 @@ input:focus {
     display: flex;
     text-align: center;
 }
+
+tr:nth-child(2n){
+    background-color: #eeee;
+}

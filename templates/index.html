@@ -10,8 +10,16 @@
     />
   </head>
   <body>
-    <h1>York University Salary Table - 2023</h1>
-    <h2>Search</h2>
+    <h1>York University Salary Table - 20{{year}}</h1>
+    <div>
+
+      <h2>Search</h2>
+      <!-- <select id="year" name="year">
+        <option value="21">2021</option>
+        <option value="22">2022</option>
+        <option value="23">2023</option>
+      </select> -->
+    </div>
     <div id="johnorgo">
       <form method="POST">
         <input type="text" id="lname" name="lname" placeholder="Last Name" />
@@ -37,5 +45,26 @@
         <input type="submit" value="Search" />
       </form>
     </div>
+    <div id="table-wrap">
+        <table style="overflow-y: scroll; height: 10vh;">
+          <thead>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Position Title</th>
+            <th>Salary</th>
+          </thead>
+          <tbody>
+            {% for employee in results %}
+            <tr>
+              <td>{{ employee[0] }}</td>
+              <td>{{ employee[1] }}</td>
+              <td>{{ employee[2] }}</td>
+              <td>{{ employee[3] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>          
+        </table>
+        </div>
+
   </body>
 </html>

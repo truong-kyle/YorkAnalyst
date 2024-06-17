@@ -1,17 +1,24 @@
 from flask import Flask, render_template, request, g
-import sqlite3
-
-
+from stroke import get_table, get_table_by_search
 
 app = Flask(__name__)
-db = sqlite3.connect('salaries23.db')
 @app.route('/', methods=['GET', 'POST'])
 
 
+
 def index():
+    year = 23
+    
     if request.method == 'POST':
-        pass
-    return render_template('index.html')
+        lname = request.form['lname']
+        fname = request.form['fname']
+        title = request.form['position']
+        min_sal = request.form['minsal']
+        max_sal = request.form['maxsal']
+        data = get_table_by_search(year, lname, fname, title, min_sal, max_sal)
+    else:
+        data = get_table(year)
+    return render_template('index.html', results=data, year=year)
 
 if __name__ == "__main__":
     app.run(debug=True)
