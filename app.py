@@ -1,10 +1,8 @@
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request
 from stroke import get_table, get_table_by_search
 
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
-
-
 
 def index():
     year = 23
