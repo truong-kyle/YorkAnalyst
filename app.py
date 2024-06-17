@@ -8,6 +8,7 @@ def index():
     year = 23
     
     if request.method == 'POST':
+        year = request.form['year']
         lname = request.form['lname']
         fname = request.form['fname']
         title = request.form['position']
