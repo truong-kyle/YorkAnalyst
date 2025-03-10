@@ -23,8 +23,8 @@
           <option value="22">2022</option>
           <option value="23">2023</option>
         </select>
-        <input type="text" id="lname" name="lname" placeholder="Last Name" />
         <input type="text" id="fname" name="fname" placeholder="First Name" />
+        <input type="text" id="lname" name="lname" placeholder="Last Name" />
         <input
           type="text"
           id="position"
@@ -50,16 +50,16 @@
       <h3>{{ "%d results" | format(count) }}</h3>
         <table style="overflow-y: scroll; height: 10vh;">
           <thead>
-            <th>Last Name</th>
             <th>First Name</th>
+            <th>Last Name</th>
             <th>Position Title</th>
             <th>Salary</th>
           </thead>
           <tbody>
             {% for employee in results %}
             <tr>
-              <td>{{ employee[0] }}</td>
               <td>{{ employee[1] }}</td>
+              <td>{{ employee[0] }}</td>
               <td>{{ employee[2] }}</td>
               <td>{{ "$%0.2f" | format(employee[3]) }}</td>
             </tr>
